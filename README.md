@@ -1,12 +1,47 @@
-# React + Vite
+Projeto inspirado no Obsidian, feito com React e Vite. Permite escrever e visualizar notas em Markdown, com uma interface simples e funcional.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Funcionalidades implementadas:
 
-Currently, two official plugins are available:
+- Sidebar com lista de funcionalidades (backlog)
+- Editor de texto com suporte a Markdown
+- Visualização em tempo real do conteúdo escrito
+- Suporte a links no estilo [[nome-da-nota]]
+- Estilização escura similar ao Obsidian
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Estrutura de pastas atual:
 
-## Expanding the ESLint configuration
+- src/
+  - components/
+    - Sidebar.jsx
+  - pages/
+    - NotePage.jsx
+  - utils/
+    - linkParser.js
+  - App.jsx
+  - main.jsx
+  - index.css
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Tecnologias usadas:
+
+- React
+- Vite
+- Tailwind CSS (ainda nao consegui/isabela)
+- React Markdown (react-markdown)
+
+Para rodar o projeto:
+
+1. Clone o repositório
+2. Rode npm install
+3. Rode npm run dev
+
+Se der erro com o react-markdown, instale com:
+
+npm install react-markdown
+
+Próximos passos:
+
+- Criar sistema de rotas
+- Criar múltiplas notas
+- Organizar em pastas
+- Salvar dados localmente
+- Criar versão desktop com Electron
