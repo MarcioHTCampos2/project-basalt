@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FiMenu, FiX, FiChevronDown, FiChevronRight } from 'react-icons/fi';
+import './SidebarMenu.css'
 
 interface SidebarMenuProps {
   pastas: string[];

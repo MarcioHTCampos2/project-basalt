@@ -87,6 +87,7 @@ export default function NotePage() {
         <h2 className="text-xl font-semibold mb-2">Pré-visualização:</h2>
         <div className='prose-note'>
           <ReactMarkdown>{renderedNote}</ReactMarkdown>
+          
         </div>
 
         <button onClick={handleSave} className="save-button">
