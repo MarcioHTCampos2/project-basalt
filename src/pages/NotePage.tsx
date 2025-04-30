@@ -77,17 +77,17 @@ export default function NotePage() {
           placeholder='Título'
           className='note-title'
         />
-        <div className='title-content-divider'></div>
+        <div className='divider'></div>
         <textarea
           className='text-area'
           value={note}
           onChange={(e) => setNote(e.target.value)}
         />
 
-        <h2 className="text-xl font-semibold mb-2">Pré-visualização:</h2>
+        {/*<h2 className="text-xl font-semibold mb-2">Pré-visualização:</h2>
         <div className='prose-note'>
           <ReactMarkdown>{renderedNote}</ReactMarkdown>
-        </div>
+        </div> */}
 
         <button onClick={handleSave} className="save-button">
           Salvar

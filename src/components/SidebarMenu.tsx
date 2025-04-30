@@ -20,15 +20,22 @@ export default function SidebarMenu({ pastas, notas, selecionarNota, criarNovaNo
 
   return (
     <div className="screen">
+      
       <button
         onClick={() => setMenuAberto(!menuAberto)}
         className="menu-button"
       >
-        {menuAberto ? <FiX size={25} /> : <FiMenu size={15} />}
+        {menuAberto ? <FiX size={15} /> : <FiMenu size={15} />}
       </button>
+     
+
 
       {menuAberto && (
+
         <div className="sidebar">
+           
+          <div className='sidebar-divider'></div>
+
           <button onClick={criarNovaNota} className="w-full mb-2">
             Criar Nova Nota
           </button>
@@ -36,6 +43,8 @@ export default function SidebarMenu({ pastas, notas, selecionarNota, criarNovaNo
             Criar Nova Pasta
           </button>
 
+          <div className='sidebar-divider'></div>
+          
           <h2 className="text-white mb-2 font-bold">Pastas</h2>
 
           {pastas.map((pasta) => (

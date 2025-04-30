@@ -9,10 +9,6 @@ body {
 }
 
 
-/* Sidebar */
-
-
-
 
 /* Botões gerais */
 button {
@@ -41,31 +37,27 @@ button:hover {
   width: 90%;
   max-width: 400px;
 }
-
-/* Textarea */
-textarea {
-  background-color: #181825;
-  border: 1px solid #313244;
-  color: #cdd6f4;
-  width: 100%;
-  height: 200px;
-  border-radius: 8px;
-  padding: 1rem;
-  font-family: monospace;
-  resize: vertical;
+/*
+html
+{
+  position:fixed;
+  width:100%;
+  height:100%;
 }
 
-/* Área de preview */
+ Área de preview 
 .prose {
   background-color: #181825;
   border: 1px solid #313244;
   border-radius: 8px;
   padding: 1rem;
 }
-
+*/
 /* Títulos */
 h1, h2 {
   color: #f5c2e7;
+  
+  
 }
 
 /* Dropdown Pastas/Notas */
