@@ -1,55 +1,58 @@
+/* Estilo para o menu principal */
 .menu {
     width: 100%;
     height: 100%;
     display: flex;
-
+    position: fixed;
+    
 }
 
-/*titulo*/
+/* Estilo para o título da nota */
 .note-title {
-    background-color: #181825;
-    border: 1px solid #313244;
-    color: #cdd6f4;
+    background-color: #181825; /* Fundo escuro */
+    border: 1px solid #313244; /* Borda com tom mais claro */
+    color: #cdd6f4; /* Cor do texto */
     width: 100%;
-    height: 5px;
-    border-radius: 8px;
-    padding: 1rem;
-    font-family: monospace;
-    resize: vertical;
+    height: 5px; /* Altura mínima */
+    border-radius: 8px; /* Bordas arredondadas */
+    padding: 1rem; /* Espaçamento interno */
+    font-family: monospace; /* Fonte monoespaçada */
+    resize: none; /* Desativa redimensionamento */
+    margin-bottom: 1rem; /* Espaçamento inferior */
 }
 
-/*divisor de conteudos e titulos para eles não ficar uns nos outros*/
-.divider {
-    flex-grow: 1;        
-    height: 10px;
-  }
 
-  /*Area de conteudos das notas */
+/* Área de conteúdo das notas */
 .text-area {
-    background-color: #181825;
-    border: 1px solid #313244;
-    color: #cdd6f4;
+    background-color: #181825; /* Fundo escuro */
+    border: 1px solid #313244; /* Borda com tom mais claro */
+    color: #cdd6f4; /* Cor do texto */
     width: 100%;
-    height: 84%;
-    border-radius: 8px;
-    padding: 1rem;
-    font-family: monospace;
-    resize:none
+    height: 84%; /* Altura relativa */
+    border-radius: 8px; /* Bordas arredondadas */
+    padding: 1rem; /* Espaçamento interno */
+    font-family: monospace; /* Fonte monoespaçada */
+    resize: none; /* Desativa redimensionamento */
+    margin-bottom: 0.1rem; /* Espaçamento inferior */
+    
+    
 }
 
-/* Área de preview */
-.prose-note{
-    background-color: #181825;
-    border: 1px solid #313244;
-    border-radius: 8px;
+/* Área de visualização (preview) */
+.prose-note {
+    background-color: #181825; /* Fundo escuro */
+    border: 1px solid #313244; /* Borda com tom mais claro */
+    border-radius: 8px; /* Bordas arredondadas */
     width: 100%;
-    padding: 1rem;
+    padding: 1rem; /* Espaçamento interno */
 }
 
-.editor-notas{
-    padding: 1rem;
-    padding-right: 3rem;
-    padding-bottom: 0;
-    height: 100vh;
+/* Editor de notas */
+.editor-notas {
+    padding: 1rem; /* Espaçamento interno */
+    padding-right: 3rem; /* Espaçamento adicional à direita */
+    padding-bottom: 0; /* Remove espaçamento inferior */
+    height: 100vh; /* Altura total da viewport */
+    overflow: auto; /* Permite rolagem se necessário */
+    
 }
-

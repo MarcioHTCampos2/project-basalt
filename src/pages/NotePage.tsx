@@ -5,7 +5,7 @@ import { parseNoteLinks } from '../utils/linkParser';  // Função que converte 
 import './NotePage.css'
 
 export default function NotePage() {
-  const [note, setNote] = useState('# Minha Nota\nEscreva algo aqui...');
+  const [note, setNote] = useState('');
   const [title, setTitle] = useState('');
   const [pastas, setPastas] = useState<string[]>(['Pasta Principal']);
   const [notas, setNotas] = useState<{ [pasta: string]: string[] }>({
@@ -23,8 +23,8 @@ export default function NotePage() {
   };
 
   const criarNovaNota = () => {
-    setTitle('# Título...');
-    setNote('# Nova Nota\nDigite seu conteúdo...');
+    setTitle('');
+    setNote('');
   };
 
   const criarNovaPasta = () => {
@@ -74,12 +74,13 @@ export default function NotePage() {
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          placeholder='Título'
+          placeholder='Título...'
           className='note-title'
         />
-        <div className='divider'></div>
+        
         <textarea
           className='text-area'
+          placeholder='Nova Nota...'
           value={note}
           onChange={(e) => setNote(e.target.value)}
         />

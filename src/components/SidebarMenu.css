@@ -1,41 +1,58 @@
+/* Estilo para a tela principal */
 .screen {
-    background-color: #181825;
-    border-right: 1px solid #313244;
-    padding: 0.5rem;
-    min-height: 100vh;
-}
-
-
-.sidebar {
-    width: 250px;
-    text-align: center;
-    
-    
-  }
-
-.sidebar > button {
-    width: 100%;
-}
-
-.sidebar-divider {
-
-  flex-grow: 1;        
-  border-bottom: 1px solid #313244;
-  height: 20px;
-}
-
-
-/* Botão Menu */
-.menu-button {
-    background-color: #313244;
-    border: none;
-    color: #cdd6f4;
-    padding: 0.5rem;
-    border-radius: 50%;
-    transition: background-color 0.3s;
-    float: right;
-  }
-  .menu-button:hover {
-    background-color: #45475a;
-  }
+  background-color: #181825; /* Fundo escuro */
+  border-right: 1px solid #313244; /* Borda lateral direita */
+  padding: 0.5rem; /* Espaçamento interno */
+  min-height: 100vh; /* Altura mínima igual à altura da viewport */
   
+}
+
+/* Estilo para a barra lateral */
+.sidebar {
+  width: 250px; /* Largura fixa da barra lateral */
+  text-align: center; /* Centraliza o texto */
+  
+}
+
+/* Estilo para os botões dentro da barra lateral */
+.sidebar > button {
+  width: 100%; /* Botões ocupam toda a largura */
+  background-color: transparent; /* Fundo transparente */
+}
+
+/* Área com rolagem na barra lateral */
+.sidebar-scroll {
+  overflow: auto; /* Permite rolagem se o conteúdo exceder a altura */
+  height: 70vh; /* Altura relativa à viewport */
+  border: 1px solid #313244; /* Borda ao redor */
+  border-radius: 8px; /* Bordas arredondadas */
+  padding: 0.5rem; /* Espaçamento interno */
+  margin-bottom: 1rem; /* Espaçamento inferior */
+}
+
+/* Divisor na barra lateral */
+.sidebar-divider {
+  flex-grow: 1; /* Expande para preencher o espaço disponível */
+  border-bottom: 1px solid #313244; /* Linha divisória */
+  height: 20px; /* Altura do divisor */
+  
+  
+}
+
+/* Estilo para o botão do menu */
+.menu-button {
+  background-color: #313244; /* Fundo escuro */
+  border: none; /* Remove borda padrão */
+  color: #cdd6f4; /* Cor do texto */
+  padding: 0.5rem; /* Espaçamento interno */
+  border-radius: 50%; /* Botão circular */
+  transition: background-color 0.3s; /* Transição suave ao passar o mouse */
+  float: right; /* Alinha o botão à direita */
+  
+}
+
+/* Efeito hover para o botão do menu */
+.menu-button:hover {
+  background-color: #45475a; /* Fundo mais claro ao passar o mouse */
+  transition: background-color 0.3s; /* Transição suave */
+}

@@ -20,20 +20,20 @@ export default function SidebarMenu({ pastas, notas, selecionarNota, criarNovaNo
 
   return (
     <div className="screen">
-      
+
       <button
         onClick={() => setMenuAberto(!menuAberto)}
         className="menu-button"
       >
         {menuAberto ? <FiX size={15} /> : <FiMenu size={15} />}
       </button>
-     
+
 
 
       {menuAberto && (
 
         <div className="sidebar">
-           
+
           <div className='sidebar-divider'></div>
 
           <button onClick={criarNovaNota} className="w-full mb-2">
@@ -44,34 +44,37 @@ export default function SidebarMenu({ pastas, notas, selecionarNota, criarNovaNo
           </button>
 
           <div className='sidebar-divider'></div>
-          
+
           <h2 className="text-white mb-2 font-bold">Pastas</h2>
 
-          {pastas.map((pasta) => (
-            <div key={pasta} className="mb-2">
-              <button
-                onClick={() => togglePasta(pasta)}
-                className="pasta-button flex items-center justify-between w-full"
-              >
-                {pasta}
-                {pastasAbertas[pasta] ? <FiChevronDown /> : <FiChevronRight />}
-              </button>
+          <div className='sidebar-scroll'>
+            
+            {pastas.map((pasta) => (
+              <div key={pasta} className="mb-2">
+                <button
+                  onClick={() => togglePasta(pasta)}
+                  className="pasta-button flex items-center justify-between w-full"
+                >
+                  {pasta}
+                  {pastasAbertas[pasta] ? <FiChevronDown /> : <FiChevronRight />}
+                </button>
 
-              {pastasAbertas[pasta] && (
-                <div className="ml-4">
-                  {notas[pasta]?.map((nota, idx) => (
-                    <button
-                      key={idx}
-                      onClick={() => selecionarNota(nota)}
-                      className="nota-item"
-                    >
-                      {nota.substring(0, 20)} {/* Exibir só um trecho da nota */}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-          ))}
+                {pastasAbertas[pasta] && (
+                  <div className="ml-4">
+                    {notas[pasta]?.map((nota, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => selecionarNota(nota)}
+                        className="nota-item"
+                      >
+                        {nota.substring(0, 20)} {/* Exibir só um trecho da nota */}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </div>
