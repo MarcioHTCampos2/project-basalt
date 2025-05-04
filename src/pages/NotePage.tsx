@@ -13,7 +13,7 @@ export default function NotePage() {
   });
 
   const [modalAberto, setModalAberto] = useState(false);
-  const [editorAberto, setEditorAberto] = useState(false)
+  const [editorAberto, setEditorAberto] = useState(true)
   const [pastaSelecionada, setPastaSelecionada] = useState('');
 
 
