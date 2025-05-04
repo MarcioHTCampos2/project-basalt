@@ -4,55 +4,156 @@
     height: 100%;
     display: flex;
     position: fixed;
-    
+
 }
 
 /* Estilo para o título da nota */
 .note-title {
-    background-color: #181825; /* Fundo escuro */
-    border: 1px solid #313244; /* Borda com tom mais claro */
-    color: #cdd6f4; /* Cor do texto */
+    background-color: #181825;
+    /* Fundo escuro */
+    border: 1px solid #313244;
+    /* Borda com tom mais claro */
+    color: #cdd6f4;
+    /* Cor do texto */
     width: 100%;
-    height: 5px; /* Altura mínima */
-    border-radius: 8px; /* Bordas arredondadas */
-    padding: 1rem; /* Espaçamento interno */
-    font-family: monospace; /* Fonte monoespaçada */
-    resize: none; /* Desativa redimensionamento */
-    margin-bottom: 1rem; /* Espaçamento inferior */
+    height: 1%;
+    /* Altura mínima */
+    border-radius: 8px;
+    /* Bordas arredondadas */
+    padding: 1rem;
+    /* Espaçamento interno */
+    font-family: monospace;
+    /* Fonte monoespaçada */
+    resize: none;
+    /* Desativa redimensionamento */
+    margin-bottom: 1rem;
+    /* Espaçamento inferior */
 }
 
 
 /* Área de conteúdo das notas */
 .text-area {
-    background-color: #181825; /* Fundo escuro */
-    border: 1px solid #313244; /* Borda com tom mais claro */
-    color: #cdd6f4; /* Cor do texto */
+    background-color: #181825;
+    /* Fundo escuro */
+    border: 1px solid #313244;
+    /* Borda com tom mais claro */
+    color: #cdd6f4;
+    /* Cor do texto */
     width: 100%;
-    height: 84%; /* Altura relativa */
-    border-radius: 8px; /* Bordas arredondadas */
-    padding: 1rem; /* Espaçamento interno */
-    font-family: monospace; /* Fonte monoespaçada */
-    resize: none; /* Desativa redimensionamento */
-    margin-bottom: 0.1rem; /* Espaçamento inferior */
-    
-    
+    height: 84%;
+    /* Altura relativa */
+    border-radius: 8px;
+    /* Bordas arredondadas */
+    padding: 1rem;
+    /* Espaçamento interno */
+    font-family: monospace;
+    /* Fonte monoespaçada */
+    font-size: 1rem;
+    /* Tamanho da fonte */
+    resize: none;
+    /* Desativa redimensionamento */
+    margin-bottom: 0.1rem;
+    /* Espaçamento inferior */
+
+
 }
 
 /* Área de visualização (preview) */
 .prose-note {
-    background-color: #181825; /* Fundo escuro */
-    border: 1px solid #313244; /* Borda com tom mais claro */
-    border-radius: 8px; /* Bordas arredondadas */
+    background-color: #181825;
+    /* Fundo escuro */
+    border: 1px solid #313244;
+    /* Borda com tom mais claro */
+    color: #cdd6f4;
+    /* Cor do texto */
     width: 100%;
-    padding: 1rem; /* Espaçamento interno */
+    height: calc(84% + 1% + 2rem);
+    /* Altura da .text-area + altura da .note-title + margem inferior da .note-title */
+    /* Altura relativa */
+    border-radius: 8px;
+    /* Bordas arredondadas */
+    padding: 1rem;
+    /* Espaçamento interno */
+    font-family: monospace;
+    /* Fonte monoespaçada */
+    font-size: 1rem;
+    /* Tamanho da fonte */
+    resize: none;
+    /* Desativa redimensionamento */
+    margin-bottom: 0.1rem;
+    /* Espaçamento inferior */
+    overflow: auto;
+    /* Permite rolagem se necessário */
+    white-space: pre-wrap;
+    /* Mantém quebras de linha e espaços em branco */
+    word-wrap: break-word;
+    /* Quebra palavras longas para caber na linha */
+    line-height: 1.5;
+    /* Espaçamento entre linhas */
+    font-weight: 400;
+    /* Peso da fonte */
 }
 
 /* Editor de notas */
 .editor-notas {
-    padding: 1rem; /* Espaçamento interno */
-    padding-right: 3rem; /* Espaçamento adicional à direita */
-    padding-bottom: 0; /* Remove espaçamento inferior */
-    height: 100vh; /* Altura total da viewport */
-    overflow: auto; /* Permite rolagem se necessário */
-    
+    padding: 1rem;
+    /* Espaçamento interno */
+    padding-right: 3rem;
+    /* Espaçamento adicional à direita */
+    padding-bottom: 0;
+    /* Remove espaçamento inferior */
+    height: 100vh;
+    /* Altura total da viewport */
+    overflow: auto;
+    /* Permite rolagem se necessário */
+
+}
+
+/* Botão de salvar */
+.save-button {
+    background-color: #7c3aed;
+    /* Fundo roxo */
+    color: white;
+    /* Texto branco */
+    padding: 0.5rem 1.5rem;
+    /* Espaçamento interno */
+    border-radius: 8px;
+    /* Bordas arredondadas */
+    float: right;
+    /* Alinha o botão à direita */
+    font-weight: bold;
+    /* Texto em negrito */
+    transition: all 0.3s;
+    /* Transição suave */
+}
+
+.save-button:hover {
+    background-color: #6d28d9;
+    /* Fundo mais escuro ao passar o mouse */
+    transform: scale(1.05);
+    /* Aumenta ligeiramente o botão */
+}
+
+.edit-button {
+    background-color: #7c3aed;
+    /* Fundo roxo */
+    color: white;
+    /* Texto branco */
+    padding: 0.5rem 1.5rem;
+    /* Espaçamento interno */
+    border-radius: 8px;
+    /* Bordas arredondadas */
+    float: right;
+    /* Alinha o botão à direita */
+    font-weight: bold;
+    /* Texto em negrito */
+    transition: all 0.3s;
+    /* Transição suave */
+}
+
+.edit-button:hover {
+    background-color: #6d28d9;
+    /* Fundo mais escuro ao passar o mouse */
+    transform: scale(1.05);
+    /* Aumenta ligeiramente o botão */
 }

@@ -13,6 +13,7 @@ export default function NotePage() {
   });
 
   const [modalAberto, setModalAberto] = useState(false);
+  const [editorAberto, setEditorAberto] = useState(false)
   const [pastaSelecionada, setPastaSelecionada] = useState('');
 
 
@@ -20,11 +21,13 @@ export default function NotePage() {
   const selecionarNota = (conteudo: string) => {
     
     setNote(conteudo);
+    setEditorAberto(false);
   };
 
   const criarNovaNota = () => {
     setTitle('');
     setNote('');
+    setEditorAberto(true);
   };
 
   const criarNovaPasta = () => {
@@ -38,6 +41,10 @@ export default function NotePage() {
   const handleSave = () => {
     setModalAberto(true);
   };
+
+  const handleEdit = () => {
+    setEditorAberto(true);
+  }
 
   const confirmarSalvar = () => {
     if (pastaSelecionada) {
@@ -54,6 +61,7 @@ export default function NotePage() {
   };
 
   const renderedNote = parseNoteLinks(note);
+  const renderedTitle = parseNoteLinks(title)
 
   return (
     <div className='menu'>
@@ -70,29 +78,29 @@ export default function NotePage() {
       </div>
       {/* Editor de Notas */}
       <main className='editor-notas'>
-        <input
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          placeholder='Título...'
-          className='note-title'
-        />
-        
-        <textarea
-          className='text-area'
-          placeholder='Nova Nota...'
-          value={note}
-          onChange={(e) => setNote(e.target.value)}
-        />
+        {editorAberto && (
+          <><input
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder='Título...'
+            className='note-title' /><textarea
+              className='text-area'
+              placeholder='Nova Nota...'
+              value={note}
+              onChange={(e) => setNote(e.target.value)} /><button onClick={handleSave} className="save-button">
+              Salvar
+            </button></>
+        )}
 
-        {/*<h2 className="text-xl font-semibold mb-2">Pré-visualização:</h2>
-        <div className='prose-note'>
-          <ReactMarkdown>{renderedNote}</ReactMarkdown>
-        </div> */}
-
-        <button onClick={handleSave} className="save-button">
-          Salvar
-        </button>
+        {!editorAberto && (
+          <><div className='prose-note'>
+            <ReactMarkdown>{renderedTitle}</ReactMarkdown>
+            <ReactMarkdown>{renderedNote}</ReactMarkdown>
+          </div><button onClick={handleEdit} className="edit-button">
+              Editar
+            </button></>
+        )}
 
         {/* Modal de salvar nota */}
         {modalAberto && (
