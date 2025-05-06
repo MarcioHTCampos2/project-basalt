@@ -2,15 +2,26 @@ import React, { useState } from 'react';
 import { FiMenu, FiX, FiChevronDown, FiChevronRight } from 'react-icons/fi';
 import "./SidebarMenu.css"
 
+interface Nota {
+  titulo: string;
+  conteudo: string;
+}
+
 interface SidebarMenuProps {
   pastas: string[];
-  notas: { [pasta: string]: string[] };
-  selecionarNota: (nota: string) => void;
+  notas: { [pasta: string]: Nota[] };
+  selecionarNota: (nota: Nota) => void;
   criarNovaNota: () => void;
   criarNovaPasta: () => void;
 }
 
-export default function SidebarMenu({ pastas, notas, selecionarNota, criarNovaNota, criarNovaPasta }: SidebarMenuProps) {
+export default function SidebarMenu({
+  pastas,
+  notas,
+  selecionarNota,
+  criarNovaNota,
+  criarNovaPasta
+}: SidebarMenuProps) {
   const [menuAberto, setMenuAberto] = useState(false);
   const [pastasAbertas, setPastasAbertas] = useState<{ [key: string]: boolean }>({});
 
@@ -20,7 +31,6 @@ export default function SidebarMenu({ pastas, notas, selecionarNota, criarNovaNo
 
   return (
     <div className="screen">
-
       <button
         onClick={() => setMenuAberto(!menuAberto)}
         className="menu-button"
@@ -28,12 +38,8 @@ export default function SidebarMenu({ pastas, notas, selecionarNota, criarNovaNo
         {menuAberto ? <FiX size={15} /> : <FiMenu size={15} />}
       </button>
 
-
-
       {menuAberto && (
-
         <div className="sidebar">
-
           <div className='sidebar-divider'></div>
 
           <button onClick={criarNovaNota} className="w-full mb-2">
@@ -48,7 +54,6 @@ export default function SidebarMenu({ pastas, notas, selecionarNota, criarNovaNo
           <h2 className="text-white mb-2 font-bold">Pastas</h2>
 
           <div className='sidebar-scroll'>
-            
             {pastas.map((pasta) => (
               <div key={pasta} className="mb-2">
                 <button
@@ -67,7 +72,7 @@ export default function SidebarMenu({ pastas, notas, selecionarNota, criarNovaNo
                         onClick={() => selecionarNota(nota)}
                         className="nota-item"
                       >
-                        {nota.substring(0, 20)} {/* Exibir só um trecho da nota */}
+                        {nota.titulo}
                       </button>
                     ))}
                   </div>
