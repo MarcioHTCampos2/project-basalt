@@ -1,7 +1,4 @@
-// src/utils/linkParser.ts
-
-export function parseNoteLinks(text: string): string {
-  return text.replace(/\[\[(.*?)\]\]/g, (_, title: string) => {
-    return `[${title}](/nota/${title})`;
-  });
+export function parseLinksFromText(text: string): string[] {
+  const regex = /https?:\/\/[^\s]+/g;
+  return text.match(regex) || [];
 }
