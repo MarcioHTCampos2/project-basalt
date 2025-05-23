@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SidebarMenu from '../components/SidebarMenu';
 import ReactMarkdown from 'react-markdown';
 import { parseNoteLinks } from '../utils/linkParser';
@@ -8,13 +8,20 @@ export default function NotePage() {
   const [note, setNote] = useState('');
   const [title, setTitle] = useState('');
   const [pastas, setPastas] = useState<string[]>(['Pasta Principal']);
-  const [notas, setNotas] = useState<{ [pasta: string]: { titulo: string; conteudo: string }[] }>({
-    'Pasta Principal': [{ titulo: 'Nota 1', conteudo: '' }, { titulo: 'Nota 2', conteudo: '' }]
+  const [notas, setNotas] = useState<{ [pasta: string]: { titulo: string; conteudo: string }[] }>(() => {
+    const saved = localStorage.getItem('notas');
+    return saved ? JSON.parse(saved) : {
+      'Pasta Principal': [{ titulo: 'Nota 1', conteudo: '' }, { titulo: 'Nota 2', conteudo: '' }]
+    };
   });
 
   const [modalAberto, setModalAberto] = useState(false);
   const [editorAberto, setEditorAberto] = useState(true);
   const [pastaSelecionada, setPastaSelecionada] = useState('');
+
+  useEffect(() => {
+    localStorage.setItem('notas', JSON.stringify(notas));
+  }, [notas]);
 
   const selecionarNota = (nota: { titulo: string; conteudo: string }) => {
     setTitle(nota.titulo);
@@ -45,22 +52,39 @@ export default function NotePage() {
   };
 
   const confirmarSalvar = () => {
-    if (pastaSelecionada) {
-      const novaNota = {
-        titulo: title,
-        conteudo: note
-      };
-      setNotas((prev) => ({
+  if (pastaSelecionada) {
+    const novaNota = {
+      titulo: title,
+      conteudo: note
+    };
+
+    setNotas((prev) => {
+      const notasDaPasta = prev[pastaSelecionada] || [];
+      const notaIndex = notasDaPasta.findIndex(n => n.titulo === title);
+
+      let novasNotasDaPasta;
+      if (notaIndex !== -1) {
+        // Override existing note
+        novasNotasDaPasta = [...notasDaPasta];
+        novasNotasDaPasta[notaIndex] = novaNota;
+      } else {
+        // Add new note
+        novasNotasDaPasta = [...notasDaPasta, novaNota];
+      }
+
+      return {
         ...prev,
-        [pastaSelecionada]: [...(prev[pastaSelecionada] || []), novaNota]
-      }));
-      alert('Nota salva com sucesso!');
-      setModalAberto(false);
-      setPastaSelecionada('');
-    } else {
-      alert('Selecione uma pasta para salvar!');
-    }
-  };
+        [pastaSelecionada]: novasNotasDaPasta
+      };
+    });
+
+    alert('Nota salva com sucesso!');
+    setModalAberto(false);
+    setPastaSelecionada('');
+  } else {
+    alert('Selecione uma pasta para salvar!');
+  }
+};
 
   const renderedNote = parseNoteLinks(note);
   const renderedTitle = parseNoteLinks(title);
