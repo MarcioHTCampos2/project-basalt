@@ -24,10 +24,13 @@ export default function SidebarMenu({
 }: SidebarMenuProps) {
   const [menuAberto, setMenuAberto] = useState(false);
   const [pastasAbertas, setPastasAbertas] = useState<{ [key: string]: boolean }>({});
+  const [searchTerm, setSearchTerm] = useState('');
 
   const togglePasta = (pasta: string) => {
     setPastasAbertas((prev) => ({ ...prev, [pasta]: !prev[pasta] }));
   };
+
+
 
   return (
     <div className="screen">
@@ -66,20 +69,32 @@ export default function SidebarMenu({
 
                 {pastasAbertas[pasta] && (
                   <div className="ml-4">
-                    {notas[pasta]?.map((nota, idx) => (
-                      <button
-                        key={idx}
-                        onClick={() => selecionarNota(nota)}
-                        className="nota-item"
-                      >
-                        {nota.titulo}
-                      </button>
-                    ))}
+                    {notas[pasta]
+                      ?.filter(nota =>
+                        searchTerm === '' ||
+                        nota.titulo.toLowerCase().startsWith(searchTerm.toLowerCase())
+                      )
+                      .map((nota, idx) => (
+                        <button
+                          key={idx}
+                          onClick={() => selecionarNota(nota)}
+                          className="nota-item"
+                        >
+                          {nota.titulo}
+                        </button>
+                      ))}
                   </div>
                 )}
               </div>
             ))}
           </div>
+          <input
+            type="text"
+            placeholder="Pesquisar..."
+            className="search-input"
+            value={searchTerm}
+            onChange={e => setSearchTerm(e.target.value)}
+          />
         </div>
       )}
     </div>

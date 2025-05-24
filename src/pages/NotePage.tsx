@@ -25,6 +25,7 @@ export default function NotePage() {
 
   const selecionarNota = (nota: { titulo: string; conteudo: string }) => {
     setTitle(nota.titulo);
+    setPastaSelecionada('');
     setNote(nota.conteudo);
     setEditorAberto(false);
   };
@@ -52,39 +53,40 @@ export default function NotePage() {
   };
 
   const confirmarSalvar = () => {
-  if (pastaSelecionada) {
-    const novaNota = {
-      titulo: title,
-      conteudo: note
-    };
-
-    setNotas((prev) => {
-      const notasDaPasta = prev[pastaSelecionada] || [];
-      const notaIndex = notasDaPasta.findIndex(n => n.titulo === title);
-
-      let novasNotasDaPasta;
-      if (notaIndex !== -1) {
-        // Override existing note
-        novasNotasDaPasta = [...notasDaPasta];
-        novasNotasDaPasta[notaIndex] = novaNota;
-      } else {
-        // Add new note
-        novasNotasDaPasta = [...notasDaPasta, novaNota];
-      }
-
-      return {
-        ...prev,
-        [pastaSelecionada]: novasNotasDaPasta
+    if (pastaSelecionada) {
+      const trimmedTitle = title.trim();
+      const novaNota = {
+        titulo: trimmedTitle,
+        conteudo: note
       };
-    });
 
-    alert('Nota salva com sucesso!');
-    setModalAberto(false);
-    setPastaSelecionada('');
-  } else {
-    alert('Selecione uma pasta para salvar!');
-  }
-};
+      setNotas((prev) => {
+        const notasDaPasta = prev[pastaSelecionada] || [];
+        const notaIndex = notasDaPasta.findIndex(n => n.titulo.trim() === trimmedTitle);
+
+        let novasNotasDaPasta;
+        if (notaIndex !== -1) {
+          // Override existing note
+          novasNotasDaPasta = [...notasDaPasta];
+          novasNotasDaPasta[notaIndex] = novaNota;
+        } else {
+          // Add new note
+          novasNotasDaPasta = [...notasDaPasta, novaNota];
+        }
+
+        return {
+          ...prev,
+          [pastaSelecionada]: novasNotasDaPasta
+        };
+      });
+
+      alert('Nota salva com sucesso!');
+      setModalAberto(false);
+      setPastaSelecionada('');
+    } else {
+      alert('Selecione uma pasta para salvar!');
+    }
+  };
 
   const renderedNote = parseNoteLinks(note);
   const renderedTitle = parseNoteLinks(title);
@@ -126,7 +128,8 @@ export default function NotePage() {
         {!editorAberto && (
           <>
             <div className='prose-note'>
-              <ReactMarkdown>{renderedTitle}</ReactMarkdown>
+              {/* Show the title as H2 only in view mode */}
+              {title && <h2>{title}</h2>}
               <ReactMarkdown>{renderedNote}</ReactMarkdown>
             </div>
             <button onClick={handleEdit} className="edit-button">
@@ -134,7 +137,6 @@ export default function NotePage() {
             </button>
           </>
         )}
-
         {modalAberto && (
           <div>
             <div className="modal-content">
