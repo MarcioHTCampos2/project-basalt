@@ -67,7 +67,7 @@
     color: #cdd6f4;
     /* Cor do texto */
     width: 100%;
-    height: calc(84% + 1% + 2rem);
+    height: calc(85.5% + 3.2rem);
     /* Altura da .text-area + altura da .note-title + margem inferior da .note-title */
     /* Altura relativa */
     border-radius: 8px;
@@ -109,22 +109,28 @@
 
 }
 
+.save-button,
+.edit-button {
+    float: none;
+    display: inline-block;
+    margin-top: 0.15rem;
+    margin-left: 0.5rem;
+    padding: 0.3rem 0.9rem;   /* menor */
+    font-size: 0.85rem;       /* menor */
+    border-radius: 8px;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+
 /* Botão de salvar */
 .save-button {
     background-color: #7c3aed;
-    /* Fundo roxo */
     color: white;
-    /* Texto branco */
     padding: 0.5rem 1.5rem;
-    /* Espaçamento interno */
     border-radius: 8px;
-    /* Bordas arredondadas */
-    float: right;
-    /* Alinha o botão à direita */
     font-weight: bold;
-    /* Texto em negrito */
     transition: all 0.3s;
-    /* Transição suave */
 }
 
 .save-button:hover {
@@ -136,19 +142,11 @@
 
 .edit-button {
     background-color: #7c3aed;
-    /* Fundo roxo */
     color: white;
-    /* Texto branco */
     padding: 0.5rem 1.5rem;
-    /* Espaçamento interno */
     border-radius: 8px;
-    /* Bordas arredondadas */
-    float: right;
-    /* Alinha o botão à direita */
     font-weight: bold;
-    /* Texto em negrito */
     transition: all 0.3s;
-    /* Transição suave */
 }
 
 .edit-button:hover {
@@ -156,4 +154,73 @@
     /* Fundo mais escuro ao passar o mouse */
     transform: scale(1.05);
     /* Aumenta ligeiramente o botão */
+}
+
+.modal-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #1e1e2e;
+  color: #cdd6f4;
+  padding: 2rem;
+  border-radius: 10px;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.3);
+}
+
+
+.select-custom {
+  background: #181825;
+  color: #cdd6f4;
+  border: 1px solid #313244;
+  border-radius: 8px;
+  font-size: 1rem;
+  padding: 0.5rem;
+    width: 100%;
+    transition: background-color 0.3s, border-color 0.3s;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    font-family: monospace;
+    font-weight: 400;
+    resize: none;
+    height: 2.5rem;
+    /* Altura fixa */
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: left;
+    /* Alinha o texto à esquerda */
+    
+}
+.select-custom:hover {
+  background: #313244;
+  border-color: #7c3aed;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+.select-option {
+  background: #181825;
+  color: #cdd6f4;
+    padding: 0.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+
+}
+.select-custom:focus {
+  border-color: #7c3aed;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(124, 56, 253, 0.5);
+    transition: border-color 0.3s, box-shadow 0.3s;
+
 }

@@ -7,7 +7,11 @@ import './NotePage.css';
 export default function NotePage() {
   const [note, setNote] = useState('');
   const [title, setTitle] = useState('');
-  const [pastas, setPastas] = useState<string[]>(['Pasta Principal']);
+  // Carrega pastas do localStorage ou usa valor padrão
+  const [pastas, setPastas] = useState<string[]>(() => {
+    const saved = localStorage.getItem('pastas');
+    return saved ? JSON.parse(saved) : ['Pasta Principal'];
+  });
   const [notas, setNotas] = useState<{ [pasta: string]: { titulo: string; conteudo: string }[] }>(() => {
     const saved = localStorage.getItem('notas');
     return saved ? JSON.parse(saved) : {
@@ -19,9 +23,16 @@ export default function NotePage() {
   const [editorAberto, setEditorAberto] = useState(true);
   const [pastaSelecionada, setPastaSelecionada] = useState('');
 
+  // Salva notas no localStorage sempre que mudarem
   useEffect(() => {
     localStorage.setItem('notas', JSON.stringify(notas));
   }, [notas]);
+
+  // Salva pastas no localStorage sempre que mudarem
+  useEffect(() => {
+    localStorage.setItem('pastas', JSON.stringify(pastas));
+  }, [pastas]);
+
 
   const selecionarNota = (nota: { titulo: string; conteudo: string }) => {
     setTitle(nota.titulo);
@@ -52,9 +63,31 @@ export default function NotePage() {
     setEditorAberto(true);
   };
 
+  const handleLinkClick = (href: string) => {
+  if (href.startsWith('#')) {
+    const decoded = decodeURIComponent(href.slice(1));
+    const firstSlash = decoded.indexOf('/');
+    if (firstSlash === -1) return;
+    const pasta = decoded.slice(0, firstSlash);
+    const titulo = decoded.slice(firstSlash + 1);
+    const nota = notas[pasta]?.find(n => n.titulo.trim() === titulo.trim());
+    if (nota) {
+      setTitle(nota.titulo);
+      setNote(nota.conteudo);
+      setEditorAberto(false);
+    } else {
+      alert(`Nota "${titulo}" não encontrada na pasta "${pasta}"`);
+    }
+  }
+};
+
   const confirmarSalvar = () => {
+    const trimmedTitle = title.trim();
+    if (!trimmedTitle) {
+      alert('O título da nota não pode estar vazio!');
+      return;
+    }
     if (pastaSelecionada) {
-      const trimmedTitle = title.trim();
       const novaNota = {
         titulo: trimmedTitle,
         conteudo: note
@@ -119,36 +152,57 @@ export default function NotePage() {
               value={note}
               onChange={(e) => setNote(e.target.value)}
             />
-            <button onClick={handleSave} className="save-button">
-              Salvar
-            </button>
+            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.5rem' }}>
+              <button onClick={handleSave} className="save-button">
+                Salvar
+              </button>
+            </div>
           </>
         )}
 
         {!editorAberto && (
           <>
             <div className='prose-note'>
-              {/* Show the title as H2 only in view mode */}
               {title && <h2>{title}</h2>}
-              <ReactMarkdown>{renderedNote}</ReactMarkdown>
+              <ReactMarkdown
+                components={{
+                  a: ({ href = '', children, ...props }) => (
+                    <a
+                      href={href}
+                      {...props}
+                      onClick={e => {
+                        e.preventDefault();
+                        handleLinkClick(href);
+                      }}
+                      style={{ color: '#7c3aed', cursor: 'pointer', textDecoration: 'underline' }}
+                    >
+                      {children}
+                    </a>
+                  ),
+                }}
+              >
+                {parseNoteLinks(note)}
+              </ReactMarkdown>
             </div>
-            <button onClick={handleEdit} className="edit-button">
-              Editar
-            </button>
+            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.5rem' }}>
+              <button onClick={handleEdit} className="edit-button">
+                Editar
+              </button>
+            </div>
           </>
         )}
         {modalAberto && (
-          <div>
+          <div className="modal-background">
             <div className="modal-content">
               <h2>Escolha a pasta</h2>
               <select
                 value={pastaSelecionada}
                 onChange={(e) => setPastaSelecionada(e.target.value)}
-                className="border p-2 rounded mb-4 w-full"
+                className="select-custom border p-2 rounded mb-4 w-full"
               >
-                <option value="">Selecione uma pasta</option>
+                <option value="" className="select-option">Selecione uma pasta</option>
                 {pastas.map((pasta) => (
-                  <option key={pasta} value={pasta}>
+                  <option key={pasta} value={pasta} className="select-option">
                     {pasta}
                   </option>
                 ))}

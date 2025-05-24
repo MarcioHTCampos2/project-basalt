@@ -1,7 +1,10 @@
 // src/utils/linkParser.ts
 
 export function parseNoteLinks(text: string): string {
-  return text.replace(/\[\[(.*?)\]\]/g, (_, title: string) => {
-    return `[${title}](/nota/${title})`;
+  // Converte [pasta/titulo] para [pasta/titulo](#pasta%20titulo)
+  return text.replace(/\[([^\]/]+)\/([^\]]+)\]/g, (_, pasta, titulo) => {
+    const pastaEncoded = encodeURIComponent(pasta);
+    const tituloEncoded = encodeURIComponent(titulo);
+    return `[${pasta}/${titulo}](#${pastaEncoded}/${tituloEncoded})`;
   });
 }
