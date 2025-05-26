@@ -7,6 +7,7 @@ interface SaveNoteModalProps {
   setPastaSelecionada: (pasta: string) => void;
   confirmar: () => void;
   cancelar: () => void;
+  
 }
 
 export default function SaveNoteModal({ pastas, pastaSelecionada, setPastaSelecionada, confirmar, cancelar }: SaveNoteModalProps) {
